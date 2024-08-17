@@ -1,0 +1,43 @@
+create table Employee_exp5_csa_36(Emp_id INT primary key,Emp_name varchar(30),Dept varchar(30),Salary float);
+
+insert into  Employee_exp5_csa_36 values(1,'David_Smith','HR',6500.00);
+insert into  Employee_exp5_csa_36 values(2,'Olivia','Marketing',7100.00);
+insert into  Employee_exp5_csa_36 values(3,'Caroline','Production',6000.00);
+insert into  Employee_exp5_csa_36 values(4,'Andrews','Sales',7500.00);
+select * from  Employee_exp5_csa_36;
+
+select * from  Employee_exp5_csa_36 where salary>7000; 
+
+update  Employee_exp5_csa_36 set salary=8200.00 where Emp_name='David_Smith';
+select * from Employee_exp5_csa_36 where Emp_name='David_Smith';
+
+
+insert into  Employee_exp5_csa_36 values(6,'Daniel_Harris','Production',6700.00);
+select * from  Employee_exp5_csa_36;
+
+delete from  Employee_exp5_csa_36 where Emp_id=3;
+select * from  Employee_exp5_csa_36 ;
+
+Select * from  Employee_exp5_csa_36 where Emp_name not like 'D%' and Emp_name  not like 'O%';
+select * from  Employee_exp5_csa_36 ;
+
+Select Dept,sum(salary) as Total_Salary_Expense from  Employee_exp5_csa_36 group by Dept;
+
+update  Employee_exp5_csa_36 set salary=salary*1.05 where Dept='Production';
+select * from  Employee_exp5_csa_36 ;
+
+delete from  Employee_exp5_csa_36 where salary<7000;
+select * from  Employee_exp5_csa_36 ;
+
+select emp_name,salary from  Employee_exp5_csa_36  where salary=(select min(salary) from  Employee_exp5_csa_36 );
+select * from  Employee_exp5_csa_36 ;
+
+update  Employee_exp5_csa_36 set salary=8200.00 where Dept='Marketing';
+select * from  Employee_exp5_csa_36 ;
+
+select Emp_name from  Employee_exp5_csa_36 where Emp_name LIKE 'A%';
+select Emp_name from Employee_exp5_csa_36 where Emp_name LIKE '%it%';
+select distinct (upper(Dept)) from  Employee_exp5_csa_36;
+Select * from  Employee_exp5_csa_36 where Dept like 'M_r%' and Dept like '%ket%';
+select distinct reverse (upper(Dept)) from  Employee_exp5_csa_36 ;
+commit;
