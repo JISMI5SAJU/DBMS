@@ -30,6 +30,31 @@ set status='Processesed'
 where quantity>50;
 select * from ord;
 
+PL/SQL CURSOR TO DISPLAY DETAILS OF ORDER TABLE HAVING QUANTITY >SPECIFIED AMOUNT:
+declare cursor temp is
+select ordid,cusid,proid,ord_date,quantity,status from ord
+where quantity>5;
+tempvar temp%rowtype;
+begin
+open temp;
+loop
+fetch temp into tempvar;
+exit when temp%notfound;
+dbms_output.put_line('Orderid:'||tempvar.ordid ||','||
+                     'Customerid:'||tempvar.cusid||','||
+                     'Productid:'||tempvar.proid||','||
+                     'OrderDate:'|| TO_CHAR(tempvar.ord_date,'YYYY-MM-DD')||','||
+                     'Quantity:'||tempvar.quantity||','||
+                     'status:'||tempvar.status);
+end loop;
+close temp;
+end;
+/
+OUT:
+Statement processed.
+Orderid:101,Customerid:1,Productid:201,OrderDate:2024-10-01,Quantity:10,status:Pending
+Orderid:104,Customerid:4,Productid:204,OrderDate:2024-10-20,Quantity:20,status:Pending
+Orderid:105,Customerid:1,Productid:202,OrderDate:2024-10-22,Quantity:60,status:Processesed
 
 
 
