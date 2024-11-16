@@ -1,0 +1,35 @@
+create  table custo (cusid int primary key,cusname varchar(30),contact number,email varchar(50));
+create table prod(proid int primary key,pro_name varchar(50),price number,stock int);
+create table ord(ordid int primary key,cusid int,proid int,ord_date date,quantity number,status varchar(30),
+foreign key(cusid) references custo(cusid) on delete cascade,foreign key (proid) references prod(proid) on delete cascade);
+
+insert into custo values(1,'Alice Johnson',123-456-7890,'alice@example.com');
+insert into custo values(3,'Carol White',345-678-9012,'carol@example.com');
+insert into custo values(4,'David Green',456-789-0123,'david@example.com');
+insert into custo values(2,'Boby Brown',234-567-8901,'bob@example.com');
+    select * from custo;
+
+insert into prod values(201,'Laptop',1000,50);
+insert into prod values(202,'Phone',800,30);
+insert into prod values(203,'Tabet',500,20);
+insert into prod values(204,'Monitor',150,15);
+select * from prod;
+
+INSERT INTO ord VALUES (101, 1, 201, TO_DATE('2024-10-01', 'YYYY-MM-DD'), 10, 'Pending');
+insert into ord values(102,2,202,TO-DATE('2024-10-15','YYYY-MM-DD'),55,'Pending');
+insert into ord values(103,3,203,TO_DATE('2024-10-25','YYYY-MM-DD'),5,'Shipped');
+insert into ord values(104,4,204,TO_DATE('2024-10-20','YYYY-MM-DD'),20,'Pending');
+insert into ord values(105,1,202,TO_DATE('2024-10-22','YYYY-MM-DD'),60,'Pending');
+select  * from ord;
+
+select c.cusname,o.* from custo c join ord o on c.cusid=o.cusid;
+select p.proid,p.pro_name,sum(p.price*o.quantity) from prod p join ord o on o.proid=p.proid group by p.proid,p.pro_name;
+select ord_date from ord where ord_date IN(select ord_date from ord where ord_date>=SYSDATE-30);
+update ord
+set status='Processesed'
+where quantity>50;
+select * from ord;
+
+
+
+
