@@ -21,6 +21,9 @@ dbms_output.put_line('Student name:'||tempvar.name||'-'||'result:Distinction');
 end if;
 end loop;
 close temp;
+exception
+when others then
+dbms_output.put_line('Error:'||SQLERRM);  
 end;
 /
 
