@@ -1,0 +1,31 @@
+create table stu(stuid int primary key,name varchar(90),mark int);
+insert into stu values(1,'jose',200);
+insert into stu values(2,'jolly',300);
+insert into stu values(3,'jessy',600);
+select * from stu;
+
+declare cursor temp is
+select stuid,name,mark from stu;
+tempvar temp%rowtype;
+begin
+open temp;
+loop
+fetch temp into tempvar;
+exit when temp%notfound;
+if(tempvar.mark)<250 then
+dbms_output.put_line('Student name:'||tempvar.name||'-'||'result:Fail');
+elsif(tempvar.mark>=250 and tempvar.mark<500) then
+dbms_output.put_line('Student name:'||tempvar.name||'-'||'result:Pass');
+else
+dbms_output.put_line('Student name:'||tempvar.name||'-'||'result:Distinction');
+end if;
+end loop;
+close temp;
+end;
+/
+
+output:
+Statement processed.
+Student name:jose-result:Fail
+Student name:jolly-result:Pass
+Student name:jessy-result:Distinction
